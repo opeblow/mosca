@@ -1,0 +1,1206 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:9cc9662a-e504-4c84-a953-0eff62bea3bc",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-11-04T16:22:36+00:00",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "mosca",
+          "version": "0.1.0"
+        }
+      ]
+    },
+    "component": {
+      "type": "application",
+      "name": "acme-payments",
+      "bom-ref": "root"
+    },
+    "properties": [
+      {
+        "name": "mosca:files_scanned",
+        "value": "10"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/aes-128",
+      "name": "AES-128",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "encrypt",
+            "decrypt"
+          ],
+          "nistQuantumSecurityLevel": 1,
+          "classicalSecurityLevel": 128
+        },
+        "oid": "2.16.840.1.101.3.4.1.6"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "infra/nginx/api.conf",
+            "line": 10,
+            "additionalContext": "cipher suite token AES128"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "quantum-weakened"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "encryption"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "AES-256-GCM"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "config"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "config"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "0.75"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/aes-256",
+      "name": "AES-256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "encrypt",
+            "decrypt"
+          ],
+          "nistQuantumSecurityLevel": 5,
+          "classicalSecurityLevel": 256
+        },
+        "oid": "2.16.840.1.101.3.4.1.46"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "infra/nginx/api.conf",
+            "line": 10,
+            "additionalContext": "cipher suite token AES256"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "quantum-safe"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "encryption"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "none needed"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "config"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "config"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "0.75"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/chacha20-poly1305",
+      "name": "ChaCha20-Poly1305",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "ae",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "encrypt",
+            "decrypt"
+          ],
+          "nistQuantumSecurityLevel": 5,
+          "classicalSecurityLevel": 256
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "services/analytics/export.py",
+            "line": 11
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "quantum-safe"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "encryption"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "none needed"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "code"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "python-ast"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "0.95"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/dh",
+      "name": "Diffie-Hellman",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "key-agree",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "keyderive"
+          ],
+          "nistQuantumSecurityLevel": 0,
+          "classicalSecurityLevel": 112
+        },
+        "oid": "1.2.840.10046.2.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "infra/ssh/sshd_config",
+            "line": 4,
+            "additionalContext": "SSH KexAlgorithms diffie-hellman-group14-sha256"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "quantum-broken"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "key-exchange"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "X25519MLKEM768 hybrid key exchange"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "config"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "config"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "0.90"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ec",
+      "name": "Elliptic-curve key",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen"
+          ],
+          "nistQuantumSecurityLevel": 0,
+          "classicalSecurityLevel": 128
+        },
+        "oid": "1.2.840.10045.2.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "services/auth/src/session.ts",
+            "line": 4
+          },
+          {
+            "location": "services/firmware/src/main/java/com/acme/firmware/Signer.java",
+            "line": 13
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "quantum-broken"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "unknown"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "ML-KEM-768 or ML-DSA-65 depending on use"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "code"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "lexical"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "0.90"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ec-p-256",
+      "name": "Elliptic-curve key-P-256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen"
+          ],
+          "nistQuantumSecurityLevel": 0,
+          "classicalSecurityLevel": 128,
+          "curve": "P-256"
+        },
+        "oid": "1.2.840.10045.2.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "services/auth/src/session.ts",
+            "line": 5
+          },
+          {
+            "location": "services/firmware/src/main/java/com/acme/firmware/Signer.java",
+            "line": 14
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "quantum-broken"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "unknown"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "ML-KEM-768 or ML-DSA-65 depending on use"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "code"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "lexical"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "0.90"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ecdh",
+      "name": "ECDH",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "key-agree",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "keyderive"
+          ],
+          "nistQuantumSecurityLevel": 0,
+          "classicalSecurityLevel": 128
+        },
+        "oid": "1.3.132.1.12"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "infra/nginx/api.conf",
+            "line": 10,
+            "additionalContext": "cipher suite token ECDHE"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "quantum-broken"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "key-exchange"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "X25519MLKEM768 hybrid key exchange"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "config"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "config"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "0.75"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ecdh-p-256",
+      "name": "ECDH-P-256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "key-agree",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "keyderive"
+          ],
+          "nistQuantumSecurityLevel": 0,
+          "classicalSecurityLevel": 128,
+          "curve": "P-256"
+        },
+        "oid": "1.3.132.1.12"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "infra/nginx/api.conf",
+            "line": 9,
+            "additionalContext": "TLS group prime256v1"
+          },
+          {
+            "location": "services/ledger/server.go",
+            "line": 14
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "quantum-broken"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "key-exchange"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "X25519MLKEM768 hybrid key exchange"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "code,config"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "config,lexical"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "0.90"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ecdsa",
+      "name": "ECDSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0,
+          "classicalSecurityLevel": 128
+        },
+        "oid": "1.2.840.10045.4.3.2"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "infra/nginx/api.conf",
+            "line": 10,
+            "additionalContext": "cipher suite token ECDSA"
+          },
+          {
+            "location": "services/auth/src/session.ts",
+            "line": 9
+          },
+          {
+            "location": "services/auth/src/session.ts",
+            "line": 13
+          },
+          {
+            "location": "services/firmware/src/main/java/com/acme/firmware/Signer.java",
+            "line": 19
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "quantum-broken"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "signature"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "ML-DSA-65 (FIPS 204)"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "code,config"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "config,lexical"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "0.90"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/ed25519",
+      "name": "Ed25519",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0,
+          "classicalSecurityLevel": 128
+        },
+        "oid": "1.3.101.112"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "infra/ssh/sshd_config",
+            "line": 5,
+            "additionalContext": "SSH HostKeyAlgorithms ssh-ed25519"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "quantum-broken"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "signature"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "ML-DSA-65 (FIPS 204)"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "config"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "config"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "0.90"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/md5",
+      "name": "MD5",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "digest"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.2.5"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "services/payments/vault.py",
+            "line": 27
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "classically-broken"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "hash"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "SHA-384 or SHA3-384"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "code"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "python-ast"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "0.95"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/rsa",
+      "name": "RSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "encrypt",
+            "decrypt",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0,
+          "classicalSecurityLevel": 112
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "services/auth/package.json",
+            "line": 8,
+            "additionalContext": "node-forge PKI toolkit (RSA)"
+          },
+          {
+            "location": "services/payments/vault.py",
+            "line": 17
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "quantum-broken"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "unknown"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "ML-KEM-768 for encryption, ML-DSA-65 for signatures"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "code,dependency"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "dependency,python-ast"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "0.95"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/rsa-2048",
+      "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "encrypt",
+            "decrypt",
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0,
+          "classicalSecurityLevel": 112,
+          "parameterSetIdentifier": "2048"
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "services/ledger/server.go",
+            "line": 20
+          },
+          {
+            "location": "services/payments/vault.py",
+            "line": 11
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "quantum-broken"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "unknown"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "ML-KEM-768 for encryption, ML-DSA-65 for signatures"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "code"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "lexical,python-ast"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "0.95"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/rsa-signature",
+      "name": "RSA signature",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0,
+          "classicalSecurityLevel": 112
+        },
+        "oid": "1.2.840.113549.1.1.11"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "infra/ssh/sshd_config",
+            "line": 5,
+            "additionalContext": "SSH HostKeyAlgorithms ssh-rsa"
+          },
+          {
+            "location": "services/auth/package.json",
+            "line": 7,
+            "additionalContext": "JWT library; check the configured algorithm"
+          },
+          {
+            "location": "services/payments/vault.py",
+            "line": 22,
+            "additionalContext": "JWT RS256"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "quantum-broken"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "signature"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "ML-DSA-65 (FIPS 204), or hybrid composite signatures during transition"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "code,config,dependency"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "config,dependency,python-ast"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "0.95"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/rsa-signature-2048",
+      "name": "RSA signature-2048",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ],
+          "nistQuantumSecurityLevel": 0,
+          "classicalSecurityLevel": 112,
+          "parameterSetIdentifier": "2048"
+        },
+        "oid": "1.2.840.113549.1.1.11"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "infra/certs/api.pem",
+            "line": 1,
+            "additionalContext": "certificate O=Acme Payments,CN=api.acme-payments.example, expires 2028-04-19"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "quantum-broken"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "signature"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "ML-DSA-65 (FIPS 204), or hybrid composite signatures during transition"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "certificate"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "pem"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "1.00"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/sha1",
+      "name": "SHA-1",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "digest"
+          ],
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.3.14.3.2.26"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "services/auth/src/session.ts",
+            "line": 17
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "classically-broken"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "hash"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "SHA-384 or SHA3-384"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "code"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "lexical"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "0.90"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/sha256",
+      "name": "SHA-256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "digest"
+          ],
+          "nistQuantumSecurityLevel": 2,
+          "classicalSecurityLevel": 128
+        },
+        "oid": "2.16.840.1.101.3.4.2.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "services/payments/vault.py",
+            "line": 17
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "quantum-safe"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "hash"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "none needed (SHA-384 for long-term signatures)"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "code"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "python-ast"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "0.95"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/x25519",
+      "name": "X25519",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "key-agree",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "keyderive"
+          ],
+          "nistQuantumSecurityLevel": 0,
+          "classicalSecurityLevel": 128
+        },
+        "oid": "1.3.101.110"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "infra/nginx/api.conf",
+            "line": 9,
+            "additionalContext": "TLS group X25519"
+          },
+          {
+            "location": "infra/ssh/sshd_config",
+            "line": 4,
+            "additionalContext": "SSH KexAlgorithms curve25519-sha256"
+          },
+          {
+            "location": "services/ledger/server.go",
+            "line": 14
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "quantum-broken"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "key-exchange"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "X25519MLKEM768 hybrid key exchange"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "code,config"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "config,lexical"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "0.90"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto/algorithm/x25519mlkem768",
+      "name": "X25519MLKEM768",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "kem",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [
+            "none"
+          ],
+          "cryptoFunctions": [
+            "keygen",
+            "encapsulate",
+            "decapsulate"
+          ],
+          "nistQuantumSecurityLevel": 3,
+          "classicalSecurityLevel": 192
+        }
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "infra/nginx/api.conf",
+            "line": 9,
+            "additionalContext": "TLS group X25519MLKEM768"
+          }
+        ]
+      },
+      "properties": [
+        {
+          "name": "mosca:status",
+          "value": "hybrid"
+        },
+        {
+          "name": "mosca:usage",
+          "value": "key-exchange"
+        },
+        {
+          "name": "mosca:replacement",
+          "value": "none needed"
+        },
+        {
+          "name": "mosca:kinds",
+          "value": "config"
+        },
+        {
+          "name": "mosca:detectors",
+          "value": "config"
+        },
+        {
+          "name": "mosca:confidence",
+          "value": "0.90"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "root",
+      "dependsOn": [
+        "crypto/algorithm/aes-128",
+        "crypto/algorithm/aes-256",
+        "crypto/algorithm/chacha20-poly1305",
+        "crypto/algorithm/dh",
+        "crypto/algorithm/ec",
+        "crypto/algorithm/ec-p-256",
+        "crypto/algorithm/ecdh",
+        "crypto/algorithm/ecdh-p-256",
+        "crypto/algorithm/ecdsa",
+        "crypto/algorithm/ed25519",
+        "crypto/algorithm/md5",
+        "crypto/algorithm/rsa",
+        "crypto/algorithm/rsa-2048",
+        "crypto/algorithm/rsa-signature",
+        "crypto/algorithm/rsa-signature-2048",
+        "crypto/algorithm/sha1",
+        "crypto/algorithm/sha256",
+        "crypto/algorithm/x25519",
+        "crypto/algorithm/x25519mlkem768"
+      ]
+    }
+  ]
+}
