@@ -1,0 +1,17 @@
+version: 2
+updates:
+  - package-ecosystem: pip
+    directory: /core
+    schedule: { interval: weekly }
+  - package-ecosystem: pip
+    directory: /ledger
+    schedule: { interval: weekly }
+  - package-ecosystem: npm
+    directory: /web
+    schedule: { interval: weekly }
+    groups:
+      react-next:
+        patterns: ["next", "react", "react-dom", "@types/react", "@types/react-dom"]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly }
