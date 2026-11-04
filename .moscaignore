@@ -1,0 +1,6 @@
+# Paths Mosca skips when scanning this repository.
+# The sample repository and test fixtures contain weak cryptography on purpose.
+examples/
+**/tests/
+web/src/data/
+docs/
