@@ -1,0 +1,39 @@
+name: Bug report
+description: Something does not work as documented.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Security vulnerabilities must be reported privately. See SECURITY.md.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options: [scanner (core), risk model (core), ledger, website, documentation]
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: The smallest input that shows the problem. Never paste real private keys or secrets.
+      render: shell
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: output of `mosca --version`
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      placeholder: OS, Python version, Node version
