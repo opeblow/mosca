@@ -11,8 +11,8 @@ license = { text = "Apache-2.0" }
 dependencies = []
 
 [project.optional-dependencies]
-certs = ["cryptography>=42"]
-dev = ["pytest>=8", "cryptography>=42"]
+certs = ["cryptography>=50.0.2"]
+dev = ["pytest>=8", "cryptography>=50.0.2"]
 
 [project.scripts]
 mosca = "mosca.cli:main"
