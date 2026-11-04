@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mosca launch film</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&family=Instrument+Serif:ital@0;1&display=block" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f1eee6; --paper-2: #e9e5da; --paper-3: #dfdacd;
+    --ink: #141413; --ink-2: #45433e; --ink-3: #78756c;
+    --rule: rgba(20,20,19,.16); --signal: #d9481f; --safe: #2e6a4c;
+    --serif: "Instrument Serif", "Times New Roman", serif;
+    --sans: "IBM Plex Sans", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--paper); }
+  body { font-family: var(--sans); color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .scene { position: absolute; inset: 0; overflow: hidden; visibility: hidden; }
+  .ink { background: var(--ink); color: var(--paper); }
+  .paper { background: var(--paper); }
+  .abs { position: absolute; }
+  .serif { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; }
+  .mono { font-family: var(--mono); letter-spacing: .08em; text-transform: uppercase; font-size: 15px; }
+  .w { display: inline-block; white-space: pre; }
+  .red { color: var(--signal); }
+  .it { font-style: italic; }
+  .chapter { position: absolute; left: 96px; top: 64px; font-family: var(--mono); font-size: 14px;
+             letter-spacing: .14em; text-transform: uppercase; }
+  .hair { position: absolute; height: 1px; background: currentColor; opacity: .35; }
+  .card { position: absolute; background: #fff; border: 1px solid var(--rule);
+          box-shadow: 0 40px 80px -40px rgba(20,20,19,.45), 0 2px 0 rgba(20,20,19,.04); }
+  .card img { display: block; width: 100%; }
+  .card .meta { position: absolute; left: 0; top: -34px; font-family: var(--mono); font-size: 14px;
+                letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); white-space: nowrap; }
+  .card .meta b { color: var(--signal); font-weight: 500; }
+  .frame { position: absolute; overflow: hidden; border: 1px solid rgba(20,20,19,.25);
+           box-shadow: 0 50px 100px -50px rgba(20,20,19,.5); background: var(--paper); }
+  .frame img { position: absolute; left: 0; top: 0; width: 100%; }
+  .mark { position: absolute; border: 3px solid var(--signal); }
+  .note { position: absolute; font-family: var(--mono); font-size: 15px; letter-spacing: .1em;
+          text-transform: uppercase; color: var(--signal); white-space: nowrap; }
+  .note::before { content: ""; display: inline-block; width: 36px; height: 1px; background: var(--signal);
+                  vertical-align: middle; margin-right: 12px; }
+  #grain { position: absolute; inset: 0; pointer-events: none; z-index: 50; opacity: .5; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.08 0 0 0 0 0.08 0 0 0 0 0.07 0 0 0 .07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+  #wipe { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--signal); z-index: 40; visibility: hidden; }
+  .cipher { position: absolute; left: 0; white-space: nowrap; font-family: var(--mono); font-size: 19px;
+            letter-spacing: .18em; color: rgba(241,238,230,.075); }
+  pre.json { font-family: var(--mono); font-size: 17px; line-height: 1.55; color: var(--ink-2); white-space: pre; }
+  pre.json .k { color: var(--ink); } pre.json .s { color: var(--signal); }
+</style>
+</head>
+<body>
+<div id="grain"></div>
+<div id="wipe"></div>
+
+<!-- 1. HOOK -->
+<section class="scene ink" id="hook">
+  <div id="cipher"></div>
+  <div class="chapter" style="color:rgba(241,238,230,.6)"><span id="recdot" style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--signal);margin-right:14px;vertical-align:1px"></span>Capture in progress &nbsp;/&nbsp; port 443 &nbsp;/&nbsp; 2026</div>
+  <div class="abs serif" id="h1" style="left:160px;top:330px;font-size:96px;line-height:1.05;width:1600px"></div>
+  <div class="abs serif" id="h2" style="left:160px;top:330px;font-size:96px;line-height:1.12;width:1600px"></div>
+  <div class="abs serif" id="h3" style="left:160px;top:390px;font-size:120px;line-height:1.05;width:1600px"></div>
+</section>
+
+<!-- 2. PROBLEM -->
+<section class="scene ink" id="problem">
+  <div class="chapter" style="color:rgba(241,238,230,.6)">01 &nbsp;/&nbsp; Harvest now, decrypt later</div>
+  <div class="abs" id="algos" style="left:160px;top:300px;width:1700px;white-space:nowrap"></div>
+  <div class="abs" id="ruler" style="left:160px;top:640px;width:1600px;height:260px"></div>
+</section>
+
+<!-- 3. INEQUALITY -->
+<section class="scene paper" id="inequality">
+  <div class="chapter">02 &nbsp;/&nbsp; Mosca's inequality</div>
+  <div class="abs serif" id="ineq" style="left:0;right:0;top:300px;text-align:center;font-size:300px;line-height:1"></div>
+  <div class="abs" id="ineqlabels" style="left:0;right:0;top:700px;height:120px"></div>
+  <div class="abs serif it red" id="exposed" style="left:0;right:0;top:860px;text-align:center;font-size:64px"></div>
+</section>
+
+<!-- 4. QUESTIONS -->
+<section class="scene paper" id="questions">
+  <div class="chapter">03 &nbsp;/&nbsp; Every team, three questions</div>
+  <div class="abs" id="qs" style="left:160px;top:250px;width:1600px"></div>
+</section>
+
+<!-- 5. REVEAL -->
+<section class="scene paper" id="reveal">
+  <div class="abs serif" id="wordmark" style="left:0;right:0;top:340px;text-align:center;font-size:240px;line-height:1">Mosca<span style="display:inline-block;width:34px;height:34px;border-radius:50%;background:var(--signal);margin-left:22px;vertical-align:8px"></span></div>
+  <div class="abs mono" id="tagline" style="left:0;right:0;top:640px;text-align:center;font-size:20px;letter-spacing:.24em;color:var(--ink-2)">Quantum-readiness for engineering teams</div>
+  <div class="frame" id="heroframe" style="left:240px;top:120px;width:1440px;height:810px"><img src="../capture/web_hero.png"></div>
+  <div class="abs mono" id="herocap" style="left:240px;top:960px;color:var(--ink-3)">mosca &nbsp;/&nbsp; the website, as built</div>
+</section>
+
+<!-- 6. SCAN -->
+<section class="scene paper" id="scan">
+  <div class="chapter">04 &nbsp;/&nbsp; In the room</div>
+  <div class="frame" id="roomwide" style="left:0;top:0;width:1920px;height:1080px;border:0"><img src="../capture/room_wide.png"></div>
+  <div class="abs mono" id="roomcap" style="left:96px;bottom:60px;padding:10px 16px;background:var(--ink);color:var(--paper)">#q-day &nbsp;/&nbsp; a Switch room on Mattermost &nbsp;/&nbsp; Nov 4, 2026</div>
+  <div class="card" id="c01" style="width:1150px"><div class="meta">user &nbsp;/&nbsp; 06:50</div><img src="../capture/p01_scan_cmd.png"></div>
+  <div class="card" id="c03" style="width:1150px"><div class="meta"><b>Mosca</b> &nbsp;/&nbsp; custom agent &nbsp;/&nbsp; 06:50</div><img src="../capture/p03_report.png"></div>
+  <div class="mark" id="m03"></div>
+  <div class="note" id="n03">Probability of exposure, per asset</div>
+  <div class="card" id="c02" style="width:760px"><div class="meta"><b>Mosca</b> &nbsp;/&nbsp; room-scoped document</div><img src="../capture/p02_cbom_doc.png"></div>
+  <div class="abs" id="cbompanel" style="left:1210px;top:300px;width:640px">
+    <div class="mono" style="color:var(--ink-3);margin-bottom:18px">CBOM acme-payments main &nbsp;/&nbsp; excerpt</div>
+    <pre class="json" id="cbomtext"></pre>
+  </div>
+</section>
+
+<!-- 7. QUESTION -->
+<section class="scene paper" id="question">
+  <div class="chapter">05 &nbsp;/&nbsp; The question only a person can answer</div>
+  <div class="card" id="c04" style="width:1300px"><div class="meta"><b>Mosca</b> &nbsp;/&nbsp; 06:50</div><img src="../capture/p04_question.png"></div>
+  <div class="card" id="c05" style="width:1300px"><div class="meta">user &nbsp;/&nbsp; owner, auth &nbsp;/&nbsp; 06:51</div><img src="../capture/p05_answer_cmd.png"></div>
+  <div class="card" id="c06" style="width:1300px"><div class="meta"><b>Mosca</b> &nbsp;/&nbsp; 06:51</div><img src="../capture/p06_recorded.png"></div>
+  <div class="mark" id="m06"></div>
+  <div class="abs serif" id="bigstat" style="left:160px;top:250px;font-size:200px;line-height:1"></div>
+</section>
+
+<!-- 8. MIGRATE -->
+<section class="scene paper" id="migrate">
+  <div class="chapter">06 &nbsp;/&nbsp; The fix</div>
+  <div class="abs mono" id="rolemig" style="left:160px;top:150px;padding:10px 16px;border:1px solid var(--ink)">Role: migrator &nbsp;/&nbsp; exclusive &nbsp;/&nbsp; held by Claude Code</div>
+  <div class="card" id="c07" style="width:1500px"><div class="meta">user &nbsp;/&nbsp; security lead &nbsp;/&nbsp; 07:35</div><img src="../capture/p07_mig_cmd.png"></div>
+  <div class="card" id="c08" style="width:1500px"><div class="meta"><b>claude-code.migrator</b> &nbsp;/&nbsp; 07:35</div><img src="../capture/p08_mig_reply.png"></div>
+  <div class="note" id="n08a">Hybrid first, classical fallback</div>
+  <div class="note" id="n08b">Says what it could not test</div>
+  <div class="card" id="c10" style="width:1200px"><div class="meta"><b>Mosca</b> &nbsp;/&nbsp; rescan &nbsp;/&nbsp; 07:39</div><img src="../capture/p10_rescan.png"></div>
+  <div class="abs" id="rescanstats" style="left:160px;top:640px;width:1600px"></div>
+</section>
+
+<!-- 9. REVIEW -->
+<section class="scene paper" id="review">
+  <div class="chapter">07 &nbsp;/&nbsp; Review, then a person decides</div>
+  <div class="abs mono" id="rolerev" style="left:160px;top:150px;padding:10px 16px;border:1px solid var(--ink)">Role: reviewer &nbsp;/&nbsp; shared &nbsp;/&nbsp; held by OpenCode</div>
+  <div class="card" id="c12" style="width:1500px"><div class="meta"><b>opencode.reviewer</b> &nbsp;/&nbsp; 07:45</div><img src="../capture/p12_rev_reply.png"></div>
+  <div class="card" id="c13" style="width:1300px"><div class="meta">user &nbsp;/&nbsp; security lead &nbsp;/&nbsp; 07:46</div><img src="../capture/p13_approve.png"></div>
+  <div class="card" id="c14" style="width:1300px"><div class="meta"><b>claude-code.migrator</b> &nbsp;/&nbsp; 07:46</div><img src="../capture/p14_decline.png"></div>
+  <div class="note" id="n14">Its role says people merge</div>
+</section>
+
+<!-- 10. LEDGER -->
+<section class="scene paper" id="ledger">
+  <div class="chapter">08 &nbsp;/&nbsp; The record</div>
+  <div class="frame" id="ledgerframe" style="left:160px;top:140px;width:1600px;height:800px"><img src="../capture/ledger_full.png"></div>
+  <div class="abs mono" id="ledgercap" style="left:160px;top:968px;color:var(--ink-3)">mosca ledger &nbsp;/&nbsp; append-only events &nbsp;/&nbsp; live data from the session</div>
+  <div class="frame" id="modelframe" style="left:160px;top:140px;width:1600px;height:800px"><img src="../capture/web_full.png"></div>
+  <div class="abs mono" id="modelcap" style="left:160px;top:968px;color:var(--ink-3)">the model, open &nbsp;/&nbsp; every assumption is a setting in mosca.toml</div>
+</section>
+
+<!-- 11. CLOSE -->
+<section class="scene paper" id="close">
+  <div class="abs serif" id="closeline" style="left:160px;top:300px;width:1640px;font-size:150px;line-height:1.02"></div>
+  <div class="abs serif" id="closesub" style="left:160px;top:720px;font-size:60px;color:var(--ink-2)"></div>
+  <div class="abs" id="endcard" style="left:0;right:0;top:330px;text-align:center">
+    <div class="serif" style="font-size:200px;line-height:1">Mosca<span style="display:inline-block;width:30px;height:30px;border-radius:50%;background:var(--signal);margin-left:20px;vertical-align:6px"></span></div>
+    <div class="mono" style="margin-top:46px;font-size:26px;letter-spacing:.06em;text-transform:none;color:var(--ink)">github.com/opeblow/mosca</div>
+    <div class="mono" style="margin-top:22px;font-size:15px;color:var(--ink-3)">Open source &nbsp;/&nbsp; Apache 2.0 &nbsp;/&nbsp; Built on Switch</div>
+  </div>
+</section>
+
+<script>
+const TL = window.TIMELINE;
+const $ = (id) => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, p) => a + (b - a) * p;
+const prog = (t, a, b) => clamp((t - a) / (b - a));
+const out3 = (p) => 1 - Math.pow(1 - p, 3);
+const inout = (p) => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+const cue = (id) => TL.cues.find((c) => c.id === id);
+const scene = (id) => TL.scenes.find((s) => s.id === id);
+const CUES = Object.fromEntries(TL.cues.map((c) => [c.id, c]));
+
+// Fade an element in over d seconds from time a (and optionally out at b).
+function show(el, t, a, d = .6, b = Infinity, dy = 24) {
+  const p = out3(prog(t, a, a + d)) * (b === Infinity ? 1 : 1 - prog(t, b, b + .5));
+  el.style.opacity = p;
+  el.style.transform = `translateY(${(1 - out3(prog(t, a, a + d))) * dy}px)`;
+  return p;
+}
+
+// Word-by-word reveal that follows the narration of a cue.
+function words(el, text, t, start, end, extraHTML) {
+  if (el.dataset.text !== text) {
+    el.innerHTML = text.split(/(\s+)/).map((w) => /\s/.test(w) ? w : `<span class="w">${w}</span>`).join("") + (extraHTML || "");
+    el.dataset.text = text;
+  }
+  const ws = el.querySelectorAll(".w");
+  ws.forEach((w, i) => {
+    const at = start + (end - start) * (i / ws.length);
+    const p = out3(prog(t, at - .05, at + .35));
+    w.style.opacity = .08 + .92 * p;
+    w.style.transform = `translateY(${(1 - p) * 10}px)`;
+  });
+}
+
+function place(el, x, y, scale = 1) {
+  el.style.left = x + "px"; el.style.top = y + "px";
+  el.style.transform = (el.style.transform || "") + ` scale(${scale})`;
+  el.style.transformOrigin = "0 0";
+}
+
+// ---------- static content built once ----------
+const HEX = "0123456789abcdef";
+function rnd(seed) { let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
+(function buildCipher() {
+  const box = $("cipher"); const r = rnd(7);
+  for (let i = 0; i < 30; i++) {
+    const row = document.createElement("div"); row.className = "cipher"; row.style.top = (i * 36) + "px";
+    let s = ""; for (let j = 0; j < 420; j++) s += HEX[Math.floor(r() * 16)] + (j % 2 ? " " : "");
+    row.textContent = s; row.dataset.speed = (18 + r() * 40) * (i % 2 ? 1 : -1); box.appendChild(row);
+  }
+})();
+
+const ALGOS = ["RSA", "ECDSA", "X25519", "Diffie-Hellman"];
+$("algos").innerHTML = ALGOS.map((a, i) => `<span class="serif" style="position:relative;display:inline-block;font-size:112px;margin-right:56px;color:var(--paper)" id="al${i}">${a}<span id="st${i}" style="position:absolute;left:-6px;top:56%;height:6px;background:var(--signal);width:0"></span></span>`).join("");
+
+const YEARS = [2024, 2026, 2028, 2030, 2032, 2034, 2036];
+$("ruler").innerHTML = `<div style="position:absolute;left:0;right:0;top:60px;height:1px;background:rgba(241,238,230,.5)" id="rline"></div>` +
+  YEARS.map((y, i) => `<div style="position:absolute;left:${i * (1600 / 6)}px;top:48px;width:1px;height:24px;background:rgba(241,238,230,.5)"></div><div class="mono" style="position:absolute;left:${i * (1600 / 6) - 30}px;top:0;color:rgba(241,238,230,.55);font-size:16px">${y}</div>`).join("") +
+  [[2024, "FIPS 203 / 204 / 205", "post-quantum standards published", "#f1eee6"],
+   [2030, "Deprecated", "RSA and ECC, proposed in NIST IR 8547", "#d9481f"],
+   [2035, "Disallowed", "proposed", "#d9481f"]].map(([y, h, s, c], i) =>
+    `<div id="ev${i}" style="position:absolute;left:${(y - 2024) * (1600 / 12)}px;top:90px;width:420px">
+       <div style="width:14px;height:14px;border-radius:50%;background:${c};margin:-37px 0 0 -7px"></div>
+       <div class="serif" style="font-size:54px;margin-top:22px;color:${c}">${h}</div>
+       <div class="mono" style="font-size:14px;color:rgba(241,238,230,.6);margin-top:8px;text-transform:none;letter-spacing:.04em">${s}</div></div>`).join("");
+
+$("ineq").innerHTML = `<span id="tx">X</span> <span id="tp">+</span> <span id="ty">Y</span> <span id="tg">&gt;</span> <span id="tz">Z</span>`;
+const LABELS = [["lx", "years data must stay secret", 565], ["ly", "years to migrate", 980], ["lz", "years until a quantum computer", 1378]];
+$("ineqlabels").innerHTML = LABELS.map(([id, txt, x]) => `<div class="mono" id="${id}" style="position:absolute;left:${x - 190}px;width:380px;text-align:center;color:var(--ink-2)">${txt}</div>`).join("");
+
+const QS = [["01", "Where is our cryptography?"], ["02", "What matters most?"], ["03", "Who fixes it?"]];
+$("qs").innerHTML = QS.map(([n, q], i) => `<div id="q${i}" style="position:relative;border-top:1px solid var(--ink);padding:34px 0 46px;display:flex;gap:80px;align-items:baseline">
+   <div class="mono" style="width:120px;color:var(--signal)">${n}</div><div class="serif" style="font-size:118px;line-height:1">${q}</div></div>`).join("");
+
+$("cbomtext").innerHTML = `{
+  <span class="k">"bomFormat"</span>: <span class="s">"CycloneDX"</span>,
+  <span class="k">"specVersion"</span>: <span class="s">"1.6"</span>,
+  <span class="k">"components"</span>: [ {
+    <span class="k">"type"</span>: <span class="s">"cryptographic-asset"</span>,
+    <span class="k">"name"</span>: <span class="s">"X25519"</span>,
+    <span class="k">"oid"</span>: <span class="s">"1.3.101.110"</span>,
+    <span class="k">"nistQuantumSecurityLevel"</span>: 0,
+    <span class="k">"occurrences"</span>: [
+      { <span class="k">"location"</span>: <span class="s">"infra/nginx/api.conf"</span>,
+        <span class="k">"line"</span>: 9 },
+      { <span class="k">"location"</span>: <span class="s">"infra/ssh/sshd_config"</span>,
+        <span class="k">"line"</span>: 4 }, ...
+    ]
+  }, ... 19 assets ]
+}`;
+const CBOM_LINES = $("cbomtext").innerHTML.split("\n");
+
+$("rescanstats").innerHTML = [["3DES", "resolved", "var(--safe)"], ["−6%", "exposure, this branch", "var(--signal)"], ["13 → 16%", "readiness after merge", "var(--ink)"]]
+  .map(([a, b, c], i) => `<div id="rs${i}" style="display:inline-block;width:520px;vertical-align:top;border-top:1px solid var(--ink);padding-top:22px">
+     <div class="serif" style="font-size:120px;line-height:1;color:${c}">${a}</div><div class="mono" style="margin-top:14px;color:var(--ink-2)">${b}</div></div>`).join("");
+
+// ---------- per-scene renderers ----------
+const R = {};
+
+R.hook = (t) => {
+  document.querySelectorAll("#cipher .cipher").forEach((row) => {
+    row.style.transform = `translateX(${-400 + (t * row.dataset.speed) % 400}px)`;
+  });
+  $("recdot").style.opacity = (Math.floor(t * 1.25) % 2) ? .25 : 1;
+  const c1 = CUES.hook1, c2 = CUES.hook2, c3 = CUES.hook3;
+  words($("h1"), "Somewhere, right now, someone is recording encrypted traffic.", t, c1.start, c1.end);
+  $("h1").style.opacity = 1 - prog(t, c2.start - .5, c2.start - .1);
+  const items = ["Card payments.", "Medical records.", "Private messages."];
+  $("h2").innerHTML = items.map((s, i) => {
+    const at = c2.start + (c2.end - c2.start) * (i / 3);
+    const p = out3(prog(t, at, at + .5)) * (1 - prog(t, c3.start - .5, c3.start - .1));
+    return `<div style="opacity:${p};transform:translateY(${(1 - p) * 16}px)">${s}</div>`;
+  }).join("");
+  const split = c3.start + (c3.end - c3.start) * .62;
+  words($("h3"), "They can't read any of it.", t, c3.start, split);
+  $("h3").style.opacity = prog(t, c3.start - .3, c3.start);
+  $("h2").style.visibility = t < c2.start - .3 ? "hidden" : "visible";
+  const ny = $("h3").querySelector(".ny") || (() => { const s = document.createElement("div"); s.className = "ny red it"; s.textContent = "Not yet."; $("h3").appendChild(s); return s; })();
+  const p = out3(prog(t, split, split + .45)); ny.style.opacity = p; ny.style.transform = `translateY(${(1 - p) * 14}px)`;
+};
+
+R.problem = (t) => {
+  const c1 = CUES.prob1, c2 = CUES.prob2;
+  ALGOS.forEach((_, i) => {
+    show($("al" + i), t, c1.start + i * .35, .7);
+    const at = c1.start + (c1.end - c1.start) * (.42 + i * .1);
+    $("st" + i).style.width = (out3(prog(t, at, at + .5)) * ($("al" + i).offsetWidth + 12)) + "px";
+    $("al" + i).style.color = `rgba(241,238,230,${1 - .55 * prog(t, at + .3, at + .8)})`;
+  });
+  $("ruler").style.opacity = out3(prog(t, c1.end - .4, c1.end + .5));
+  [0, 1, 2].forEach((i) => show($("ev" + i), t, c2.start + (c2.end - c2.start) * [0.05, .55, .8][i], .6));
+};
+
+R.inequality = (t) => {
+  const c = CUES.prob3, s = scene("inequality");
+  const d = c.end - c.start;
+  const z = 1 + .04 * prog(t, s.start, s.end);
+  $("ineq").style.transform = `scale(${z})`;
+  const marks = { tx: .12, ty: .3, tz: .55, tg: .82 };
+  for (const [id, f] of Object.entries(marks)) {
+    const on = prog(t, c.start + d * f, c.start + d * f + .4);
+    $(id).style.color = id === "tg" ? `rgb(${lerp(20, 217, on)},${lerp(20, 72, on)},${lerp(19, 31, on)})` : "var(--ink)";
+    $(id).style.opacity = .25 + .75 * Math.max(on, prog(t, s.start, s.start + .3) * .0 + (t > c.start + d * f ? 1 : 0));
+  }
+  $("tp").style.opacity = .25 + .75 * prog(t, c.start + d * .28, c.start + d * .32);
+  [["lx", .12], ["ly", .3], ["lz", .55]].forEach(([id, f]) => show($(id), t, c.start + d * f, .5));
+  $("exposed").textContent = "you are already exposed.";
+  show($("exposed"), t, c.start + d * .88, .6);
+};
+
+R.questions = (t) => {
+  const c = CUES.prob4, d = c.end - c.start;
+  [.36, .62, .84].forEach((f, i) => show($("q" + i), t, c.start + d * f - .15, .6));
+};
+
+R.reveal = (t) => {
+  const s = scene("reveal"), c = CUES.reveal;
+  const mid = c.end + .2;
+  const wm = out3(prog(t, s.start + .2, s.start + 1.4)) * (1 - prog(t, mid, mid + .5));
+  $("wordmark").style.opacity = wm;
+  $("wordmark").style.transform = `scale(${1.04 - .04 * out3(prog(t, s.start, s.start + 2))})`;
+  $("tagline").style.opacity = out3(prog(t, s.start + 1.2, s.start + 2)) * (1 - prog(t, mid, mid + .5));
+  const hp = out3(prog(t, mid + .2, mid + 1.2));
+  $("heroframe").style.opacity = hp;
+  $("heroframe").style.transform = `translateY(${(1 - hp) * 80}px) scale(${1 + .03 * prog(t, mid, s.end)})`;
+  $("herocap").style.opacity = hp;
+};
+
+function stackCard(el, t, at, x, y, w) {
+  el.style.width = w + "px";
+  el.style.left = x + "px"; el.style.top = y + "px";
+  return show(el, t, at, .7, Infinity, 30);
+}
+
+R.scan = (t) => {
+  const s = scene("scan"), c1 = CUES.core1, c2 = CUES.core2;
+  // Establishing shot of the real room, slow push-in.
+  const wideEnd = c1.start + 2.6;
+  const wp = 1 - prog(t, wideEnd, wideEnd + .6);
+  $("roomwide").style.opacity = wp; $("roomcap").style.opacity = wp;
+  $("roomwide").querySelector("img").style.transform = `scale(${1 + .05 * prog(t, s.start, wideEnd)})`;
+  $("roomwide").querySelector("img").style.transformOrigin = "60% 55%";
+  const shift = out3(prog(t, c2.start, c2.start + 1));
+  const w = lerp(1300, 1020, shift), x = lerp(310, 96, shift);
+  stackCard($("c01"), t, wideEnd + .2, x, 170, w);
+  stackCard($("c03"), t, wideEnd + .6, x, 170 + w * 108 / 1852 + 56, w);
+  // Highlight the P(exposed) column.
+  const colX = x + w * 785 / 1852, colW = w * 210 / 1852, top = 170 + w * 108 / 1852 + 56 + w * 150 / 1852, h = w * 595 / 1852;
+  const mp = out3(prog(t, c1.start + (c1.end - c1.start) * .62, c1.start + (c1.end - c1.start) * .62 + .5)) * (1 - prog(t, c2.start, c2.start + .4));
+  Object.assign($("m03").style, { left: colX + "px", top: top + "px", width: colW + "px", height: h + "px", opacity: mp });
+  Object.assign($("n03").style, { left: (colX) + "px", top: (top + h + 16) + "px", opacity: mp });
+  // The CBOM document and an excerpt of the real file.
+  stackCard($("c02"), t, c2.start + .4, x, 170 + w * 108 / 1852 + 56 + w * 810 / 1852 + 60, Math.min(760, w * .7));
+  const pp = out3(prog(t, c2.start + .6, c2.start + 1.4));
+  $("cbompanel").style.opacity = pp;
+  $("cbompanel").style.transform = `translateX(${(1 - pp) * 40}px)`;
+  const n = Math.floor(lerp(0, CBOM_LINES.length, prog(t, c2.start + .8, c2.end)));
+  $("cbomtext").innerHTML = CBOM_LINES.slice(0, Math.max(1, n)).join("\n");
+};
+
+R.question = (t) => {
+  const c3 = CUES.core3, c4 = CUES.core4, s = scene("question");
+  const w = 1300, x = 310;
+  stackCard($("c04"), t, s.start + .1, x, 230, w);
+  stackCard($("c05"), t, c4.start + .1, x, 230 + w * 132 / 1852 + 60, w);
+  const y6 = 230 + 2 * (w * 132 / 1852 + 60);
+  stackCard($("c06"), t, c4.start + (c4.end - c4.start) * .35, x, y6, w);
+  // Mark the 1% -> 70% cells.
+  const at = c4.start + (c4.end - c4.start) * .68;
+  const mp = out3(prog(t, at, at + .5));
+  Object.assign($("m06").style, { left: (x + w * 452 / 1852) + "px", top: (y6 + w * 172 / 1852) + "px",
+    width: (w * 218 / 1852) + "px", height: (w * 148 / 1852) + "px", opacity: mp });
+  $("bigstat").innerHTML = `<span style="color:var(--ink-3)">1%</span> <span style="font-size:110px;color:var(--ink-3)">→</span> <span class="red">70%</span>`;
+  $("bigstat").style.left = "310px"; $("bigstat").style.top = (y6 + w * 340 / 1852 + 70) + "px";
+  $("bigstat").style.fontSize = "150px";
+  show($("bigstat"), t, at + .3, .7);
+};
+
+R.migrate = (t) => {
+  const d1 = CUES.deep1, d2 = CUES.deep2, s = scene("migrate");
+  const out = prog(t, d2.start - .2, d2.start + .4);
+  show($("rolemig"), t, s.start + .1, .6);
+  const w = 1500, x = 210;
+  $("c07").style.opacity = 0; $("c08").style.opacity = 0;
+  stackCard($("c07"), t, d1.start + .2, x, 270, w);
+  stackCard($("c08"), t, d1.start + (d1.end - d1.start) * .3, x, 270 + w * 146 / 1852 + 60, w);
+  $("c07").style.opacity *= 1 - out; $("c08").style.opacity *= 1 - out;
+  const y8 = 270 + w * 146 / 1852 + 60;
+  const na = show($("n08a"), t, d1.start + (d1.end - d1.start) * .55, .5) * (1 - out);
+  Object.assign($("n08a").style, { left: (x + 40) + "px", top: (y8 + w * 368 / 1852 + 30) + "px", opacity: na });
+  const nb = show($("n08b"), t, d1.start + (d1.end - d1.start) * .82, .5) * (1 - out);
+  Object.assign($("n08b").style, { left: (x + 700) + "px", top: (y8 + w * 368 / 1852 + 30) + "px", opacity: nb });
+  stackCard($("c10"), t, d2.start + .1, 360, 300, 1200);
+  [0, 1, 2].forEach((i) => show($("rs" + i), t, d2.start + .5 + i * .45, .6));
+  $("rescanstats").style.top = (300 + 1200 * 200 / 1852 + 90) + "px";
+};
+
+R.review = (t) => {
+  const d3 = CUES.deep3, d4 = CUES.deep4, s = scene("review");
+  const out = prog(t, d4.start - .2, d4.start + .4);
+  show($("rolerev"), t, s.start + .1, .6);
+  $("rolerev").style.opacity *= 1 - out;
+  stackCard($("c12"), t, d3.start + .3, 210, 270, 1500);
+  $("c12").style.opacity *= 1 - out;
+  stackCard($("c13"), t, d4.start + .1, 310, 200, 1300);
+  stackCard($("c14"), t, d4.start + (d4.end - d4.start) * .35, 310, 200 + 1300 * 108 / 1852 + 60, 1300);
+  const y14 = 200 + 1300 * 108 / 1852 + 60 + 1300 * 568 / 1852 + 26;
+  const np = show($("n14"), t, d4.start + (d4.end - d4.start) * .7, .5);
+  Object.assign($("n14").style, { left: "350px", top: y14 + "px", opacity: np });
+};
+
+R.ledger = (t) => {
+  const p1 = CUES.pay1, p2 = CUES.pay2, s = scene("ledger");
+  const sw = prog(t, p2.start - .3, p2.start + .5);
+  const lp = out3(prog(t, s.start, s.start + .8)) * (1 - sw);
+  $("ledgerframe").style.opacity = lp; $("ledgercap").style.opacity = lp;
+  const scale = 1600 / 1920;
+  const pan = inout(prog(t, s.start + .8, p2.start)) * 1150;
+  $("ledgerframe").querySelector("img").style.transform = `translateY(${-pan * scale}px)`;
+  $("modelframe").style.opacity = sw; $("modelcap").style.opacity = sw;
+  const mpan = 843 + inout(prog(t, p2.start, s.end)) * 780;
+  $("modelframe").querySelector("img").style.transform = `translateY(${-mpan * scale}px)`;
+};
+
+R.close = (t) => {
+  const c1 = CUES.close1, c2 = CUES.close2, s = scene("close");
+  words($("closeline"), "The data you encrypt today has a", t, c1.start, c1.start + (c1.end - c1.start) * .62,
+        ` <span class="w red it">decryption</span> <span class="w red it">date.</span>`);
+  const endAt = c2.end + 1.0;
+  const fadeText = 1 - prog(t, endAt, endAt + .6);
+  $("closeline").style.opacity = fadeText;
+  words($("closesub"), "Mosca helps your team find it, and move first.", t, c2.start, c2.end);
+  $("closesub").style.opacity = fadeText;
+  const ep = out3(prog(t, endAt + .5, endAt + 1.6)) * (1 - prog(t, s.end - .9, s.end - .1));
+  $("endcard").style.opacity = ep;
+  $("endcard").style.transform = `translateY(${(1 - ep) * 20}px)`;
+};
+
+// ---------- master seek ----------
+const IN_DUR = { cut: 0, fade: .7, wipe: .8, rise: .9 };
+window.seek = function (t) {
+  const S = TL.scenes;
+  for (let i = 0; i < S.length; i++) {
+    const sc = S[i], el = $(sc.id);
+    const trans = i > 0 ? S[i - 1].transition : "cut";
+    const d = IN_DUR[trans] || 0;
+    const nextTrans = sc.transition, nd = IN_DUR[nextTrans] || 0;
+    const visible = t >= sc.start && t < sc.end + nd;
+    el.style.visibility = visible ? "visible" : "hidden";
+    if (!visible) continue;
+    el.style.zIndex = i + 1;
+    el.style.opacity = 1; el.style.clipPath = "none"; el.style.transform = "none";
+    const p = d ? inout(prog(t, sc.start, sc.start + d)) : 1;
+    if (trans === "fade") el.style.opacity = p;
+    if (trans === "wipe") el.style.clipPath = `inset(0 ${(1 - p) * 100}% 0 0)`;
+    if (trans === "rise") { el.style.opacity = p; el.style.transform = `translateY(${(1 - p) * 60}px)`; }
+    R[sc.id](t);
+  }
+  // The signal-red edge that leads a wipe.
+  const wipe = $("wipe"); wipe.style.visibility = "hidden";
+  for (let i = 1; i < S.length; i++) {
+    if (S[i - 1].transition !== "wipe") continue;
+    const p = prog(t, S[i].start, S[i].start + IN_DUR.wipe);
+    if (p > 0 && p < 1) { wipe.style.visibility = "visible"; wipe.style.left = (inout(p) * 1920) + "px"; }
+  }
+  // Grain sits on paper scenes; on ink it reads as dust, so it is lighter there.
+  const cur = S.find((s) => t >= s.start && t < s.end);
+  $("grain").style.opacity = cur && ["hook", "problem"].includes(cur.id) ? .15 : .5;
+  // Close: fade to paper over the last half second.
+  document.body.style.opacity = 1;
+};
+window.ready = document.fonts.ready.then(() => Promise.all([...document.images].map((im) => im.decode().catch(() => {}))));
+</script>
+</body>
+</html>
