@@ -1,0 +1,62 @@
+# Mosca policy for the Acme Payments sample repository.
+#
+# Each system maps code paths to an owner. Mosca asks owners in chat how long their
+# data must stay secret; until they answer, the data class (or the default) is used.
+
+[crqc]
+# Prior on when a cryptographically relevant quantum computer arrives.
+# Calibrate these from your own threat model.
+median_year = 2036
+earliest_year = 2029
+spread = 0.6
+
+[defaults]
+shelf_life_years = 7
+signature_lifetime_years = 2
+target_exposure = 0.05
+
+[[systems]]
+name = "payments"
+paths = ["services/payments/**"]
+owner = "ana"
+data_class = "financial"
+criticality = 1.0
+description = "Card tokenisation and settlement"
+
+[[systems]]
+name = "auth"
+paths = ["services/auth/**"]
+owner = "dev"
+criticality = 0.9
+description = "Sessions and API tokens"
+
+[[systems]]
+name = "ledger"
+paths = ["services/ledger/**"]
+owner = "kofi"
+data_class = "financial"
+criticality = 1.0
+description = "Double-entry ledger service"
+
+[[systems]]
+name = "firmware"
+paths = ["services/firmware/**"]
+owner = "mei"
+signature_lifetime_years = 12
+criticality = 0.8
+description = "Card terminal firmware signing"
+
+[[systems]]
+name = "edge"
+paths = ["infra/**"]
+owner = "sam"
+data_class = "pii"
+criticality = 1.0
+description = "Public TLS termination and bastion hosts"
+
+[[systems]]
+name = "analytics"
+paths = ["services/analytics/**"]
+owner = "lin"
+data_class = "internal"
+criticality = 0.4
