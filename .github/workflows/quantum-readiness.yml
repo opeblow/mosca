@@ -20,7 +20,7 @@ jobs:
           python-version: "3.12"
       - run: pip install "./core[certs]"
       - name: Cryptographic bill of materials
-        run: mosca scan examples/acme-payments --name acme-payments -o cbom.json
+        run: mosca scan examples/acme-payments --name acme-payments -o "$RUNNER_TEMP/cbom.json"
       - name: Exposure report
         run: |
           {
@@ -28,13 +28,14 @@ jobs:
             echo
             mosca assess examples/acme-payments --limit 10
           } >> "$GITHUB_STEP_SUMMARY"
-          mosca assess examples/acme-payments --out assessment.json
+          mosca assess examples/acme-payments --out "$RUNNER_TEMP/assessment.json"
       - uses: actions/upload-artifact@v4
         with:
           name: mosca-report
+          # Written outside the checkout so the self-scan below never reads them.
           path: |
-            cbom.json
-            assessment.json
+            ${{ runner.temp }}/cbom.json
+            ${{ runner.temp }}/assessment.json
       - name: Mosca's own code must not introduce weak cryptography
         # .moscaignore excludes the sample repository and test fixtures.
         run: |
