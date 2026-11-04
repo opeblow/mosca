@@ -1,0 +1,715 @@
+{
+  "now_year": 2026.84,
+  "crqc_median_year": 2036.0,
+  "crqc_p05_year": 2031.6,
+  "target_exposure": 0.05,
+  "readiness": 0.129,
+  "summary": {
+    "assets": 21,
+    "to_migrate": 17,
+    "exposed": 11,
+    "classically_broken": 3,
+    "quantum_safe": 3
+  },
+  "pending_questions": [
+    {
+      "system": "auth",
+      "owner": "dev",
+      "kind": "signature_lifetime_years",
+      "text": "How many years must signatures from `auth` stay trusted?"
+    },
+    {
+      "system": "edge",
+      "owner": "sam",
+      "kind": "signature_lifetime_years",
+      "text": "How many years must signatures from `edge` stay trusted?"
+    },
+    {
+      "system": "payments",
+      "owner": "ana",
+      "kind": "signature_lifetime_years",
+      "text": "How many years must signatures from `payments` stay trusted?"
+    }
+  ],
+  "assets": [
+    {
+      "id": "payments/md5",
+      "system": "payments",
+      "owner": "ana",
+      "algorithm": "md5",
+      "algorithm_name": "MD5",
+      "parameter": null,
+      "usage": "hash",
+      "status": "classically-broken",
+      "replacement": "SHA-384 or SHA3-384",
+      "occurrences": [
+        {
+          "path": "services/payments/vault.py",
+          "line": 27,
+          "kind": "code",
+          "snippet": "return hashlib.md5(payload).hexdigest()",
+          "confidence": 0.95
+        }
+      ],
+      "x_years": 0.0,
+      "x_source": "",
+      "y_years": 0.0,
+      "exposure": 1.0,
+      "deadline_year": null,
+      "years_late": 0.0,
+      "priority": 95.0,
+      "needs_owner_input": false,
+      "verdict": "Broken today, independent of quantum computing. Replace now."
+    },
+    {
+      "id": "auth/sha1",
+      "system": "auth",
+      "owner": "dev",
+      "algorithm": "sha1",
+      "algorithm_name": "SHA-1",
+      "parameter": null,
+      "usage": "hash",
+      "status": "classically-broken",
+      "replacement": "SHA-384 or SHA3-384",
+      "occurrences": [
+        {
+          "path": "services/auth/src/session.ts",
+          "line": 17,
+          "kind": "code",
+          "snippet": "return createHash(\"sha1\").update(`${userAgent}|${ip}`).digest(\"hex\");",
+          "confidence": 0.9
+        }
+      ],
+      "x_years": 0.0,
+      "x_source": "",
+      "y_years": 0.0,
+      "exposure": 1.0,
+      "deadline_year": null,
+      "years_late": 0.0,
+      "priority": 81.0,
+      "needs_owner_input": false,
+      "verdict": "Broken today, independent of quantum computing. Replace now."
+    },
+    {
+      "id": "edge/3des",
+      "system": "edge",
+      "owner": "sam",
+      "algorithm": "3des",
+      "algorithm_name": "Triple DES",
+      "parameter": null,
+      "usage": "encryption",
+      "status": "classically-broken",
+      "replacement": "AES-256-GCM",
+      "occurrences": [
+        {
+          "path": "infra/nginx/api.conf",
+          "line": 10,
+          "kind": "config",
+          "snippet": "ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:DES-CBC3-SHA;",
+          "confidence": 0.75
+        }
+      ],
+      "x_years": 0.0,
+      "x_source": "",
+      "y_years": 0.0,
+      "exposure": 1.0,
+      "deadline_year": null,
+      "years_late": 0.0,
+      "priority": 75.0,
+      "needs_owner_input": false,
+      "verdict": "Broken today, independent of quantum computing. Replace now."
+    },
+    {
+      "id": "payments/rsa",
+      "system": "payments",
+      "owner": "ana",
+      "algorithm": "rsa",
+      "algorithm_name": "RSA",
+      "parameter": "2048",
+      "usage": "encryption",
+      "status": "quantum-broken",
+      "replacement": "ML-KEM-768 for encryption, ML-DSA-65 for signatures",
+      "occurrences": [
+        {
+          "path": "services/payments/vault.py",
+          "line": 11,
+          "kind": "code",
+          "snippet": "return rsa.generate_private_key(public_exponent=65537, key_size=2048)",
+          "confidence": 0.95
+        },
+        {
+          "path": "services/payments/vault.py",
+          "line": 17,
+          "kind": "code",
+          "snippet": "padding.OAEP(mgf=padding.MGF1(algorithm=hashes.SHA256()), algorithm=hashes.SHA256(), label=None),",
+          "confidence": 0.95
+        }
+      ],
+      "x_years": 10.0,
+      "x_source": "data class 'financial'",
+      "y_years": 0.84,
+      "exposure": 0.657,
+      "deadline_year": 2020.8,
+      "years_late": 6.0,
+      "priority": 62.4,
+      "needs_owner_input": false,
+      "verdict": "Harvest-now-decrypt-later: traffic recorded today stays readable for 10 more years."
+    },
+    {
+      "id": "ledger/x25519",
+      "system": "ledger",
+      "owner": "kofi",
+      "algorithm": "x25519",
+      "algorithm_name": "X25519",
+      "parameter": null,
+      "usage": "key-exchange",
+      "status": "quantum-broken",
+      "replacement": "X25519MLKEM768 hybrid key exchange",
+      "occurrences": [
+        {
+          "path": "services/ledger/server.go",
+          "line": 14,
+          "kind": "code",
+          "snippet": "CurvePreferences: []tls.CurveID{tls.X25519, tls.CurveP256},",
+          "confidence": 0.9
+        }
+      ],
+      "x_years": 10.0,
+      "x_source": "data class 'financial'",
+      "y_years": 0.77,
+      "exposure": 0.6513,
+      "deadline_year": 2020.8,
+      "years_late": 6.0,
+      "priority": 58.6,
+      "needs_owner_input": false,
+      "verdict": "Harvest-now-decrypt-later: traffic recorded today stays readable for 10 more years."
+    },
+    {
+      "id": "ledger/rsa",
+      "system": "ledger",
+      "owner": "kofi",
+      "algorithm": "rsa",
+      "algorithm_name": "RSA",
+      "parameter": "2048",
+      "usage": "unknown",
+      "status": "quantum-broken",
+      "replacement": "ML-KEM-768 for encryption, ML-DSA-65 for signatures",
+      "occurrences": [
+        {
+          "path": "services/ledger/server.go",
+          "line": 20,
+          "kind": "code",
+          "snippet": "key, err := rsa.GenerateKey(rand.Reader, 2048)",
+          "confidence": 0.9
+        }
+      ],
+      "x_years": 10.0,
+      "x_source": "data class 'financial'",
+      "y_years": 0.77,
+      "exposure": 0.6495,
+      "deadline_year": 2020.8,
+      "years_late": 6.0,
+      "priority": 58.5,
+      "needs_owner_input": false,
+      "verdict": "Harvest-now-decrypt-later: traffic recorded today stays readable for 10 more years."
+    },
+    {
+      "id": "edge/x25519",
+      "system": "edge",
+      "owner": "sam",
+      "algorithm": "x25519",
+      "algorithm_name": "X25519",
+      "parameter": null,
+      "usage": "key-exchange",
+      "status": "quantum-broken",
+      "replacement": "X25519MLKEM768 hybrid key exchange",
+      "occurrences": [
+        {
+          "path": "infra/nginx/api.conf",
+          "line": 9,
+          "kind": "config",
+          "snippet": "ssl_ecdh_curve X25519:prime256v1;",
+          "confidence": 0.9
+        },
+        {
+          "path": "infra/ssh/sshd_config",
+          "line": 4,
+          "kind": "config",
+          "snippet": "KexAlgorithms curve25519-sha256,diffie-hellman-group14-sha256",
+          "confidence": 0.9
+        }
+      ],
+      "x_years": 10.0,
+      "x_source": "data class 'pii'",
+      "y_years": 0.75,
+      "exposure": 0.6465,
+      "deadline_year": 2020.9,
+      "years_late": 5.9,
+      "priority": 58.2,
+      "needs_owner_input": false,
+      "verdict": "Harvest-now-decrypt-later: traffic recorded today stays readable for 10 more years."
+    },
+    {
+      "id": "ledger/ecdh",
+      "system": "ledger",
+      "owner": "kofi",
+      "algorithm": "ecdh",
+      "algorithm_name": "ECDH",
+      "parameter": "P-256",
+      "usage": "key-exchange",
+      "status": "quantum-broken",
+      "replacement": "X25519MLKEM768 hybrid key exchange",
+      "occurrences": [
+        {
+          "path": "services/ledger/server.go",
+          "line": 14,
+          "kind": "code",
+          "snippet": "CurvePreferences: []tls.CurveID{tls.X25519, tls.CurveP256},",
+          "confidence": 0.9
+        }
+      ],
+      "x_years": 10.0,
+      "x_source": "data class 'financial'",
+      "y_years": 0.77,
+      "exposure": 0.6458,
+      "deadline_year": 2020.8,
+      "years_late": 6.0,
+      "priority": 58.1,
+      "needs_owner_input": false,
+      "verdict": "Harvest-now-decrypt-later: traffic recorded today stays readable for 10 more years."
+    },
+    {
+      "id": "edge/ecdh",
+      "system": "edge",
+      "owner": "sam",
+      "algorithm": "ecdh",
+      "algorithm_name": "ECDH",
+      "parameter": "P-256",
+      "usage": "key-exchange",
+      "status": "quantum-broken",
+      "replacement": "X25519MLKEM768 hybrid key exchange",
+      "occurrences": [
+        {
+          "path": "infra/nginx/api.conf",
+          "line": 9,
+          "kind": "config",
+          "snippet": "ssl_ecdh_curve X25519:prime256v1;",
+          "confidence": 0.9
+        },
+        {
+          "path": "infra/nginx/api.conf",
+          "line": 10,
+          "kind": "config",
+          "snippet": "ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:DES-CBC3-SHA;",
+          "confidence": 0.75
+        }
+      ],
+      "x_years": 10.0,
+      "x_source": "data class 'pii'",
+      "y_years": 0.69,
+      "exposure": 0.6413,
+      "deadline_year": 2020.9,
+      "years_late": 5.9,
+      "priority": 57.7,
+      "needs_owner_input": false,
+      "verdict": "Harvest-now-decrypt-later: traffic recorded today stays readable for 10 more years."
+    },
+    {
+      "id": "firmware/ecdsa",
+      "system": "firmware",
+      "owner": "mei",
+      "algorithm": "ecdsa",
+      "algorithm_name": "ECDSA",
+      "parameter": "P-256",
+      "usage": "signature",
+      "status": "quantum-broken",
+      "replacement": "ML-DSA-65 (FIPS 204)",
+      "occurrences": [
+        {
+          "path": "services/firmware/src/main/java/com/acme/firmware/Signer.java",
+          "line": 19,
+          "kind": "code",
+          "snippet": "Signature sig = Signature.getInstance(\"SHA256withECDSA\");",
+          "confidence": 0.9
+        },
+        {
+          "path": "services/firmware/src/main/java/com/acme/firmware/Signer.java",
+          "line": 13,
+          "kind": "code",
+          "snippet": "KeyPairGenerator kpg = KeyPairGenerator.getInstance(\"EC\");",
+          "confidence": 0.9
+        },
+        {
+          "path": "services/firmware/src/main/java/com/acme/firmware/Signer.java",
+          "line": 14,
+          "kind": "code",
+          "snippet": "kpg.initialize(new ECGenParameterSpec(\"secp256r1\"));",
+          "confidence": 0.9
+        }
+      ],
+      "x_years": 12.0,
+      "x_source": "set in mosca.toml",
+      "y_years": 1.33,
+      "exposure": 0.7947,
+      "deadline_year": 2018.3,
+      "years_late": 8.5,
+      "priority": 57.2,
+      "needs_owner_input": false,
+      "verdict": "Signatures become forgeable once a quantum computer exists."
+    },
+    {
+      "id": "edge/dh",
+      "system": "edge",
+      "owner": "sam",
+      "algorithm": "dh",
+      "algorithm_name": "Diffie-Hellman",
+      "parameter": null,
+      "usage": "key-exchange",
+      "status": "quantum-broken",
+      "replacement": "X25519MLKEM768 hybrid key exchange",
+      "occurrences": [
+        {
+          "path": "infra/ssh/sshd_config",
+          "line": 4,
+          "kind": "config",
+          "snippet": "KexAlgorithms curve25519-sha256,diffie-hellman-group14-sha256",
+          "confidence": 0.9
+        }
+      ],
+      "x_years": 10.0,
+      "x_source": "data class 'pii'",
+      "y_years": 0.62,
+      "exposure": 0.6344,
+      "deadline_year": 2021.0,
+      "years_late": 5.8,
+      "priority": 57.1,
+      "needs_owner_input": false,
+      "verdict": "Harvest-now-decrypt-later: traffic recorded today stays readable for 10 more years."
+    },
+    {
+      "id": "edge/rsa-signature",
+      "system": "edge",
+      "owner": "sam",
+      "algorithm": "rsa-signature",
+      "algorithm_name": "RSA signature",
+      "parameter": "2048",
+      "usage": "signature",
+      "status": "quantum-broken",
+      "replacement": "ML-DSA-65 (FIPS 204), or hybrid composite signatures during transition",
+      "occurrences": [
+        {
+          "path": "infra/certs/api.pem",
+          "line": 1,
+          "kind": "certificate",
+          "snippet": "-----BEGIN CERTIFICATE-----",
+          "confidence": 1.0
+        },
+        {
+          "path": "infra/ssh/sshd_config",
+          "line": 5,
+          "kind": "config",
+          "snippet": "HostKeyAlgorithms ssh-ed25519,ssh-rsa",
+          "confidence": 0.9
+        }
+      ],
+      "x_years": 2.0,
+      "x_source": "default (owner has not answered)",
+      "y_years": 1.8,
+      "exposure": 0.026,
+      "deadline_year": 2027.8,
+      "years_late": 0.0,
+      "priority": 2.6,
+      "needs_owner_input": true,
+      "verdict": "Signatures become forgeable once a quantum computer exists."
+    },
+    {
+      "id": "edge/aes-128",
+      "system": "edge",
+      "owner": "sam",
+      "algorithm": "aes-128",
+      "algorithm_name": "AES-128",
+      "parameter": null,
+      "usage": "encryption",
+      "status": "quantum-weakened",
+      "replacement": "AES-256-GCM",
+      "occurrences": [
+        {
+          "path": "infra/nginx/api.conf",
+          "line": 10,
+          "kind": "config",
+          "snippet": "ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:DES-CBC3-SHA;",
+          "confidence": 0.75
+        }
+      ],
+      "x_years": 0.0,
+      "x_source": "",
+      "y_years": 0.0,
+      "exposure": 0.0,
+      "deadline_year": null,
+      "years_late": 0.0,
+      "priority": 1.5,
+      "needs_owner_input": false,
+      "verdict": "Grover's algorithm halves the security level. Prefer 256-bit keys for long-lived data."
+    },
+    {
+      "id": "auth/ecdsa",
+      "system": "auth",
+      "owner": "dev",
+      "algorithm": "ecdsa",
+      "algorithm_name": "ECDSA",
+      "parameter": "P-256",
+      "usage": "signature",
+      "status": "quantum-broken",
+      "replacement": "ML-DSA-65 (FIPS 204)",
+      "occurrences": [
+        {
+          "path": "services/auth/src/session.ts",
+          "line": 9,
+          "kind": "code",
+          "snippet": "return jwt.sign({ sub: userId }, privateKey, { algorithm: \"ES256\", expiresIn: \"1h\" });",
+          "confidence": 0.9
+        },
+        {
+          "path": "services/auth/src/session.ts",
+          "line": 13,
+          "kind": "code",
+          "snippet": "return jwt.verify(token, publicKey, { algorithms: [\"ES256\"] });",
+          "confidence": 0.9
+        },
+        {
+          "path": "services/auth/src/session.ts",
+          "line": 4,
+          "kind": "code",
+          "snippet": "const { privateKey, publicKey } = generateKeyPairSync(\"ec\", {",
+          "confidence": 0.9
+        },
+        {
+          "path": "services/auth/src/session.ts",
+          "line": 5,
+          "kind": "code",
+          "snippet": "namedCurve: \"prime256v1\",",
+          "confidence": 0.9
+        }
+      ],
+      "x_years": 2.0,
+      "x_source": "default (owner has not answered)",
+      "y_years": 1.39,
+      "exposure": 0.0092,
+      "deadline_year": 2028.2,
+      "years_late": 0.0,
+      "priority": 0.7,
+      "needs_owner_input": true,
+      "verdict": "Signatures become forgeable once a quantum computer exists."
+    },
+    {
+      "id": "payments/rsa-signature",
+      "system": "payments",
+      "owner": "ana",
+      "algorithm": "rsa-signature",
+      "algorithm_name": "RSA signature",
+      "parameter": null,
+      "usage": "signature",
+      "status": "quantum-broken",
+      "replacement": "ML-DSA-65 (FIPS 204), or hybrid composite signatures during transition",
+      "occurrences": [
+        {
+          "path": "services/payments/vault.py",
+          "line": 22,
+          "kind": "code",
+          "snippet": "return jwt.encode({\"batch\": batch_id}, private_key, algorithm=\"RS256\")",
+          "confidence": 0.95
+        }
+      ],
+      "x_years": 2.0,
+      "x_source": "default (owner has not answered)",
+      "y_years": 1.16,
+      "exposure": 0.0047,
+      "deadline_year": 2028.4,
+      "years_late": 0.0,
+      "priority": 0.5,
+      "needs_owner_input": true,
+      "verdict": "Signatures become forgeable once a quantum computer exists."
+    },
+    {
+      "id": "auth/rsa-signature",
+      "system": "auth",
+      "owner": "dev",
+      "algorithm": "rsa-signature",
+      "algorithm_name": "RSA signature",
+      "parameter": null,
+      "usage": "signature",
+      "status": "quantum-broken",
+      "replacement": "ML-DSA-65 (FIPS 204), or hybrid composite signatures during transition",
+      "occurrences": [
+        {
+          "path": "services/auth/package.json",
+          "line": 7,
+          "kind": "dependency",
+          "snippet": "jsonwebtoken",
+          "confidence": 0.5
+        },
+        {
+          "path": "services/auth/package.json",
+          "line": 8,
+          "kind": "dependency",
+          "snippet": "node-forge",
+          "confidence": 0.5
+        }
+      ],
+      "x_years": 2.0,
+      "x_source": "default (owner has not answered)",
+      "y_years": 1.41,
+      "exposure": 0.0098,
+      "deadline_year": 2028.2,
+      "years_late": 0.0,
+      "priority": 0.4,
+      "needs_owner_input": true,
+      "verdict": "Signatures become forgeable once a quantum computer exists."
+    },
+    {
+      "id": "edge/ecdsa",
+      "system": "edge",
+      "owner": "sam",
+      "algorithm": "ecdsa",
+      "algorithm_name": "ECDSA",
+      "parameter": null,
+      "usage": "signature",
+      "status": "quantum-broken",
+      "replacement": "ML-DSA-65 (FIPS 204)",
+      "occurrences": [
+        {
+          "path": "infra/nginx/api.conf",
+          "line": 10,
+          "kind": "config",
+          "snippet": "ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:DES-CBC3-SHA;",
+          "confidence": 0.75
+        }
+      ],
+      "x_years": 2.0,
+      "x_source": "default (owner has not answered)",
+      "y_years": 0.93,
+      "exposure": 0.0009,
+      "deadline_year": 2028.7,
+      "years_late": 0.0,
+      "priority": 0.1,
+      "needs_owner_input": true,
+      "verdict": "Signatures become forgeable once a quantum computer exists."
+    },
+    {
+      "id": "edge/ed25519",
+      "system": "edge",
+      "owner": "sam",
+      "algorithm": "ed25519",
+      "algorithm_name": "Ed25519",
+      "parameter": null,
+      "usage": "signature",
+      "status": "quantum-broken",
+      "replacement": "ML-DSA-65 (FIPS 204)",
+      "occurrences": [
+        {
+          "path": "infra/ssh/sshd_config",
+          "line": 5,
+          "kind": "config",
+          "snippet": "HostKeyAlgorithms ssh-ed25519,ssh-rsa",
+          "confidence": 0.9
+        }
+      ],
+      "x_years": 2.0,
+      "x_source": "default (owner has not answered)",
+      "y_years": 0.93,
+      "exposure": 0.0006,
+      "deadline_year": 2028.7,
+      "years_late": 0.0,
+      "priority": 0.1,
+      "needs_owner_input": true,
+      "verdict": "Signatures become forgeable once a quantum computer exists."
+    },
+    {
+      "id": "analytics/chacha20-poly1305",
+      "system": "analytics",
+      "owner": "lin",
+      "algorithm": "chacha20-poly1305",
+      "algorithm_name": "ChaCha20-Poly1305",
+      "parameter": null,
+      "usage": "encryption",
+      "status": "quantum-safe",
+      "replacement": "none needed",
+      "occurrences": [
+        {
+          "path": "services/analytics/export.py",
+          "line": 11,
+          "kind": "code",
+          "snippet": "return nonce + ChaCha20Poly1305(key).encrypt(nonce, blob, None)",
+          "confidence": 0.95
+        }
+      ],
+      "x_years": 0.0,
+      "x_source": "",
+      "y_years": 0.0,
+      "exposure": 0.0,
+      "deadline_year": null,
+      "years_late": 0.0,
+      "priority": 0.0,
+      "needs_owner_input": false,
+      "verdict": "Quantum-safe."
+    },
+    {
+      "id": "edge/aes-256",
+      "system": "edge",
+      "owner": "sam",
+      "algorithm": "aes-256",
+      "algorithm_name": "AES-256",
+      "parameter": null,
+      "usage": "encryption",
+      "status": "quantum-safe",
+      "replacement": "none needed",
+      "occurrences": [
+        {
+          "path": "infra/nginx/api.conf",
+          "line": 10,
+          "kind": "config",
+          "snippet": "ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:DES-CBC3-SHA;",
+          "confidence": 0.75
+        }
+      ],
+      "x_years": 0.0,
+      "x_source": "",
+      "y_years": 0.0,
+      "exposure": 0.0,
+      "deadline_year": null,
+      "years_late": 0.0,
+      "priority": 0.0,
+      "needs_owner_input": false,
+      "verdict": "Quantum-safe."
+    },
+    {
+      "id": "payments/sha256",
+      "system": "payments",
+      "owner": "ana",
+      "algorithm": "sha256",
+      "algorithm_name": "SHA-256",
+      "parameter": null,
+      "usage": "hash",
+      "status": "quantum-safe",
+      "replacement": "none needed (SHA-384 for long-term signatures)",
+      "occurrences": [
+        {
+          "path": "services/payments/vault.py",
+          "line": 17,
+          "kind": "code",
+          "snippet": "padding.OAEP(mgf=padding.MGF1(algorithm=hashes.SHA256()), algorithm=hashes.SHA256(), label=None),",
+          "confidence": 0.95
+        }
+      ],
+      "x_years": 0.0,
+      "x_source": "",
+      "y_years": 0.0,
+      "exposure": 0.0,
+      "deadline_year": null,
+      "years_late": 0.0,
+      "priority": 0.0,
+      "needs_owner_input": false,
+      "verdict": "Quantum-safe."
+    }
+  ]
+}
