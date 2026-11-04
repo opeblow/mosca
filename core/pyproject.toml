@@ -12,7 +12,7 @@ dependencies = []
 
 [project.optional-dependencies]
 certs = ["cryptography>=42"]
-dev = ["pytest>=8", "cryptography>=42"]
+dev = ["pytest>=9.2.0", "cryptography>=42"]
 
 [project.scripts]
 mosca = "mosca.cli:main"
