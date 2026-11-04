@@ -1,0 +1,105 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install -e "./core[dev]" -e "./ledger[dev]" -e "./agent[dev]"
+      - run: pytest core
+      - run: pytest ledger
+      - run: pytest agent
+      - name: Scan the sample repository
+        run: |
+          mosca scan examples/acme-payments -o cbom.json
+          mosca assess examples/acme-payments
+
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+
+  end-to-end:
+    runs-on: ubuntu-latest
+    needs: [python, web]
+    env:
+      MOSCA_LEDGER_TOKEN: ci-token
+      MOSCA_LEDGER_DB: ${{ runner.temp }}/ledger.db
+      LEDGER_URL: http://127.0.0.1:8000
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: pip install "./core[certs]" ./ledger
+      - name: Build the website
+        working-directory: web
+        run: npm ci && npm run build
+      - name: Start the ledger and the website
+        run: |
+          uvicorn mosca_ledger.app:app --port 8000 > ledger.log 2>&1 &
+          (cd web && npx next start -p 3000 > ../web.log 2>&1 &)
+          for i in $(seq 1 60); do
+            curl -sf http://127.0.0.1:8000/healthz > /dev/null && curl -sf http://127.0.0.1:3000 > /dev/null && exit 0
+            sleep 1
+          done
+          echo "services did not start"; exit 1
+      - name: Writes without a token are rejected
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$LEDGER_URL/v1/repos/acme-payments/answers" \
+            -H "Content-Type: application/json" \
+            -d '{"system":"payments","kind":"signature_lifetime_years","years":1,"answered_by":"ana"}')
+          test "$code" = "401"
+      - name: Scan, answer, rescan
+        run: |
+          mosca assess examples/acme-payments --push "$LEDGER_URL" --repo acme-payments --ref main --out first.json
+          curl -sf -X POST "$LEDGER_URL/v1/repos/acme-payments/answers" \
+            -H "Authorization: Bearer $MOSCA_LEDGER_TOKEN" -H "Content-Type: application/json" \
+            -d '{"system":"payments","kind":"signature_lifetime_years","years":1,"answered_by":"ana"}'
+          mosca assess examples/acme-payments --answers "$LEDGER_URL/v1/repos/acme-payments/answers" \
+            --push "$LEDGER_URL" --repo acme-payments --ref main --out second.json
+          python - <<'EOF'
+          import json
+          first, second = (json.load(open(f)) for f in ("first.json", "second.json"))
+          answered = lambda r: any(q["system"] == "payments" for q in r["pending_questions"])
+          assert answered(first) and not answered(second), "owner answer was not applied"
+          EOF
+      - name: The dashboard shows live ledger data
+        run: |
+          page=$(curl -sf http://127.0.0.1:3000/ledger)
+          echo "$page" | grep -q "Updated "
+          echo "$page" | grep -q "across"
+          ! echo "$page" | grep -q "Sample data from the bundled"
+      - name: Logs on failure
+        if: failure()
+        run: cat ledger.log web.log
