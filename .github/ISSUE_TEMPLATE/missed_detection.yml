@@ -1,0 +1,31 @@
+name: Missed or wrong detection
+description: Mosca missed cryptography, or reported something that is not there.
+labels: [detection]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options: [false negative (missed it), false positive (wrong finding), wrong algorithm or parameters]
+    validations:
+      required: true
+  - type: input
+    id: language
+    attributes:
+      label: Language, library or file format
+      placeholder: e.g. Go crypto/tls, Caddyfile, Bouncy Castle
+    validations:
+      required: true
+  - type: textarea
+    id: sample
+    attributes:
+      label: Minimal sample
+      description: A few lines that reproduce it. Never paste real private keys.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected finding
+      placeholder: algorithm, key size or curve, and line
