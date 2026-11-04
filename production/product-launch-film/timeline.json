@@ -1,0 +1,197 @@
+{
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "duration": 174.0,
+  "pause_scale": 1.316,
+  "scenes": [
+    {
+      "id": "hook",
+      "start": 0.0,
+      "end": 15.346,
+      "transition": "cut"
+    },
+    {
+      "id": "problem",
+      "start": 15.346,
+      "end": 35.615,
+      "transition": "wipe"
+    },
+    {
+      "id": "inequality",
+      "start": 35.615,
+      "end": 50.695,
+      "transition": "cut"
+    },
+    {
+      "id": "questions",
+      "start": 50.695,
+      "end": 59.009,
+      "transition": "fade"
+    },
+    {
+      "id": "reveal",
+      "start": 59.009,
+      "end": 67.74,
+      "transition": "rise"
+    },
+    {
+      "id": "scan",
+      "start": 67.74,
+      "end": 86.669,
+      "transition": "cut"
+    },
+    {
+      "id": "question",
+      "start": 86.669,
+      "end": 104.998,
+      "transition": "wipe"
+    },
+    {
+      "id": "migrate",
+      "start": 104.998,
+      "end": 124.883,
+      "transition": "cut"
+    },
+    {
+      "id": "review",
+      "start": 124.883,
+      "end": 141.01,
+      "transition": "fade"
+    },
+    {
+      "id": "ledger",
+      "start": 141.01,
+      "end": 157.504,
+      "transition": "cut"
+    },
+    {
+      "id": "close",
+      "start": 157.504,
+      "end": 174.0,
+      "transition": "end"
+    }
+  ],
+  "cues": [
+    {
+      "id": "hook1",
+      "start": 1.843,
+      "end": 5.342,
+      "text": "Somewhere, right now, someone is recording encrypted traffic."
+    },
+    {
+      "id": "hook2",
+      "start": 6.527,
+      "end": 9.792,
+      "text": "Card payments. Medical records. Private messages."
+    },
+    {
+      "id": "hook3",
+      "start": 11.24,
+      "end": 13.24,
+      "text": "They can't read any of it. Not yet."
+    },
+    {
+      "id": "prob1",
+      "start": 16.004,
+      "end": 26.082,
+      "text": "When a large enough quantum computer exists, the math behind R S A and elliptic curves stops protecting anything. Data taken today gets opened then."
+    },
+    {
+      "id": "prob2",
+      "start": 27.004,
+      "end": 34.431,
+      "text": "NIST published the post-quantum standards in twenty twenty-four, and has proposed retiring the old algorithms by twenty thirty."
+    },
+    {
+      "id": "prob3",
+      "start": 36.142,
+      "end": 48.852,
+      "text": "Michele Mosca put the risk in one line. If the years your data must stay secret, plus the years it takes to migrate, add up to more than the years until that computer arrives... you are already exposed."
+    },
+    {
+      "id": "prob4",
+      "start": 51.09,
+      "end": 57.693,
+      "text": "So every team has to answer three questions. Where is our cryptography? What matters most? And who fixes it?"
+    },
+    {
+      "id": "reveal",
+      "start": 60.589,
+      "end": 65.107,
+      "text": "This is Mosca. A quantum-readiness teammate that works inside your team chat."
+    },
+    {
+      "id": "core1",
+      "start": 68.398,
+      "end": 78.349,
+      "text": "In a Switch room, someone asks it to scan. Mosca reads the code, the configs, the certificates, and ranks every algorithm by its probability of exposure."
+    },
+    {
+      "id": "core2",
+      "start": 79.271,
+      "end": 85.616,
+      "text": "It attaches a standard cryptographic bill of materials to the room, so everyone works from the same inventory."
+    },
+    {
+      "id": "core3",
+      "start": 87.195,
+      "end": 92.476,
+      "text": "Then it asks the one question only a person can answer. How long must this stay trusted?"
+    },
+    {
+      "id": "core4",
+      "start": 93.661,
+      "end": 103.418,
+      "text": "The owner says ten years. Mosca records the answer, with a name, in an append-only ledger. Two signatures jump from one percent to seventy. Overdue."
+    },
+    {
+      "id": "deep1",
+      "start": 105.656,
+      "end": 117.809,
+      "text": "Now, the fix. Claude Code holds the room's migrator role. One agent at a time. It moves the edge to hybrid post-quantum key exchange on a branch, and says plainly what it could not test."
+    },
+    {
+      "id": "deep2",
+      "start": 118.862,
+      "end": 123.698,
+      "text": "Mosca rescans the branch. Triple DES is gone. Exposure is down."
+    },
+    {
+      "id": "deep3",
+      "start": 125.409,
+      "end": 132.921,
+      "text": "OpenCode, a second agent from a different vendor, holds the reviewer role. It checks the change line by line, and approves."
+    },
+    {
+      "id": "deep4",
+      "start": 133.974,
+      "end": 139.43,
+      "text": "A person signs off. And the migrator declines to merge, because its role says people merge."
+    },
+    {
+      "id": "pay1",
+      "start": 141.668,
+      "end": 147.086,
+      "text": "Every answer and every assessment is kept. So you can always show who decided what, and when."
+    },
+    {
+      "id": "pay2",
+      "start": 148.139,
+      "end": 155.924,
+      "text": "The model is open. The assumptions are yours to change. And every number you just saw came from a real session, not a slide."
+    },
+    {
+      "id": "close1",
+      "start": 158.821,
+      "end": 161.581,
+      "text": "The data you encrypt today has a decryption date."
+    },
+    {
+      "id": "close2",
+      "start": 163.424,
+      "end": 166.102,
+      "text": "Mosca helps your team find it, and move first."
+    }
+  ]
+}
