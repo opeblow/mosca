@@ -1,0 +1,39 @@
+# Python
+.venv/
+__pycache__/
+*.egg-info/
+build/
+.pytest_cache/
+*.pyc
+
+# Node
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Runtime data and secrets
+/data/
+*.db
+*.db-wal
+*.db-shm
+.env
+.env.local
+
+# Local notes
+.private/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Personal task notes
+do.md
+
+# Film production intermediates
+production/**/node_modules/
+production/**/out/
+production/**/.cache/
