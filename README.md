@@ -26,6 +26,10 @@ A quantum-readiness teammate that lives in your team chat: it finds every crypto
   <img src="docs/images/hero.png" alt="Mosca website: the data you encrypt today has a decryption date" width="100%">
 </p>
 
+<p align="center">
+  <a href="production/product-launch-film/mosca-launch-film.mp4"><b>Watch the 3-minute film</b></a> &nbsp;/&nbsp; every interface shot is the real product and the real room session
+</p>
+
 ---
 
 ## Contents
@@ -184,7 +188,7 @@ This also fits the sponsor. SandboxAQ's core business is AI plus quantum, and po
 | **Use of Switch: is it central?** | The workflow is the room: instructions, a reference, room-scoped documents, an exclusive and a shared role, addressing rules, a custom protocol agent, and two other vendors' agents. Without Switch there is no shared place to hand work between them. See [How Switch is used](#how-switch-is-used) |
 | **Technical execution: can someone reproduce it?** | 76 tests (scanner, model, ledger contract, agent commands, protocol client against a fake Switch). CI runs the whole system end to end. One script creates the room. Deterministic, seeded Monte Carlo, so the same inputs give the same numbers. See [Quick start](#quick-start) and [Run the whole room yourself](#run-the-whole-room-yourself) |
 | **Creativity and impact** | A real problem every company with RSA or ECC must solve, on a public deadline, that no official Switch example covers. Mosca turns a long list of findings into decisions: what first, who answers, did it work |
-| **Presentation** | Real screenshots from a real session, a product film, a website with an interactive model, and this README |
+| **Presentation** | Real screenshots from a real session, a [3-minute product film](production/product-launch-film/mosca-launch-film.mp4) built from them, a website with an interactive model, and this README |
 
 ---
 
