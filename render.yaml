@@ -1,0 +1,23 @@
+# Render blueprint for the ledger API, built and run as a native Python service.
+# Deploy: Render dashboard > New > Blueprint > select this repository.
+services:
+  - type: web
+    name: mosca-ledger
+    runtime: python
+    rootDir: ledger
+    buildCommand: pip install .
+    startCommand: uvicorn mosca_ledger.app:app --host 0.0.0.0 --port $PORT --proxy-headers
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.7"
+      - key: MOSCA_LEDGER_TOKEN
+        generateValue: true
+      - key: MOSCA_LEDGER_DB
+        value: /var/data/ledger.db
+      - key: MOSCA_LEDGER_CORS
+        sync: false
+    disk:
+      name: ledger-data
+      mountPath: /var/data
+      sizeGB: 1
