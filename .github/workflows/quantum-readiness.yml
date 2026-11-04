@@ -1,0 +1,44 @@
+# Mosca scanning itself and its sample repository on every change:
+# the CBOM is uploaded as an artifact and the ranked report is shown in the job summary.
+name: quantum-readiness
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  mosca:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install "./core[certs]"
+      - name: Cryptographic bill of materials
+        run: mosca scan examples/acme-payments --name acme-payments -o cbom.json
+      - name: Exposure report
+        run: |
+          {
+            echo "## Quantum exposure: examples/acme-payments"
+            echo
+            mosca assess examples/acme-payments --limit 10
+          } >> "$GITHUB_STEP_SUMMARY"
+          mosca assess examples/acme-payments --out assessment.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mosca-report
+          path: |
+            cbom.json
+            assessment.json
+      - name: Mosca's own code must not introduce weak cryptography
+        # .moscaignore excludes the sample repository and test fixtures.
+        run: |
+          mosca assess . --fail-above 0.05 || {
+            echo "::error::Mosca's own source uses quantum-vulnerable or broken cryptography."
+            exit 1
+          }
