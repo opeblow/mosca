@@ -49,7 +49,6 @@ jobs:
     needs: [python, web]
     env:
       MOSCA_LEDGER_TOKEN: ci-token
-      MOSCA_LEDGER_DB: ${{ runner.temp }}/ledger.db
       LEDGER_URL: http://127.0.0.1:8000
     steps:
       - uses: actions/checkout@v4
@@ -67,6 +66,7 @@ jobs:
         run: npm ci && npm run build
       - name: Start the ledger and the website
         run: |
+          export MOSCA_LEDGER_DB="$RUNNER_TEMP/ledger.db"
           uvicorn mosca_ledger.app:app --port 8000 > ledger.log 2>&1 &
           (cd web && npx next start -p 3000 > ../web.log 2>&1 &)
           for i in $(seq 1 60); do
