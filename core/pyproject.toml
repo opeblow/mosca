@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mosca"
+version = "0.1.0"
+description = "Find every cryptographic asset in a codebase and measure how exposed it is to quantum attack."
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+dependencies = []
+
+[project.optional-dependencies]
+certs = ["cryptography>=42"]
+dev = ["pytest>=8", "cryptography>=42"]
+
+[project.scripts]
+mosca = "mosca.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
