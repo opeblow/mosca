@@ -1,0 +1,79 @@
+1
+00:00:01,843 --> 00:00:05,342
+Somewhere, right now, someone is recording encrypted traffic.
+
+2
+00:00:06,527 --> 00:00:09,792
+Card payments. Medical records. Private messages.
+
+3
+00:00:11,240 --> 00:00:13,240
+They can't read any of it. Not yet.
+
+4
+00:00:16,004 --> 00:00:26,082
+When a large enough quantum computer exists, the math behind R S A and elliptic curves stops protecting anything. Data taken today gets opened then.
+
+5
+00:00:27,004 --> 00:00:34,431
+NIST published the post-quantum standards in twenty twenty-four, and has proposed retiring the old algorithms by twenty thirty.
+
+6
+00:00:36,142 --> 00:00:48,852
+Michele Mosca put the risk in one line. If the years your data must stay secret, plus the years it takes to migrate, add up to more than the years until that computer arrives... you are already exposed.
+
+7
+00:00:51,090 --> 00:00:57,693
+So every team has to answer three questions. Where is our cryptography? What matters most? And who fixes it?
+
+8
+00:01:00,589 --> 00:01:05,107
+This is Mosca. A quantum-readiness teammate that works inside your team chat.
+
+9
+00:01:08,398 --> 00:01:18,349
+In a Switch room, someone asks it to scan. Mosca reads the code, the configs, the certificates, and ranks every algorithm by its probability of exposure.
+
+10
+00:01:19,271 --> 00:01:25,616
+It attaches a standard cryptographic bill of materials to the room, so everyone works from the same inventory.
+
+11
+00:01:27,195 --> 00:01:32,476
+Then it asks the one question only a person can answer. How long must this stay trusted?
+
+12
+00:01:33,661 --> 00:01:43,418
+The owner says ten years. Mosca records the answer, with a name, in an append-only ledger. Two signatures jump from one percent to seventy. Overdue.
+
+13
+00:01:45,656 --> 00:01:57,809
+Now, the fix. Claude Code holds the room's migrator role. One agent at a time. It moves the edge to hybrid post-quantum key exchange on a branch, and says plainly what it could not test.
+
+14
+00:01:58,862 --> 00:02:03,698
+Mosca rescans the branch. Triple DES is gone. Exposure is down.
+
+15
+00:02:05,409 --> 00:02:12,921
+OpenCode, a second agent from a different vendor, holds the reviewer role. It checks the change line by line, and approves.
+
+16
+00:02:13,974 --> 00:02:19,430
+A person signs off. And the migrator declines to merge, because its role says people merge.
+
+17
+00:02:21,668 --> 00:02:27,086
+Every answer and every assessment is kept. So you can always show who decided what, and when.
+
+18
+00:02:28,139 --> 00:02:35,924
+The model is open. The assumptions are yours to change. And every number you just saw came from a real session, not a slide.
+
+19
+00:02:38,821 --> 00:02:41,581
+The data you encrypt today has a decryption date.
+
+20
+00:02:43,424 --> 00:02:46,102
+Mosca helps your team find it, and move first.
