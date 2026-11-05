@@ -39,3 +39,6 @@ production/**/capture/
 production/**/audio/
 production/**/out/
 production/**/frames/
+
+# Private demo link notes (never commit)
+URL.md

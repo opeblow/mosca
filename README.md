@@ -1,3 +1,11 @@
+<h2 align="center">DEMO VIDEO</h2>
+
+<p align="center">
+  <a href="https://youtu.be/kbJPH0ggyPc"><img src="https://img.youtube.com/vi/kbJPH0ggyPc/maxresdefault.jpg" alt="Mosca demo video: click to watch on YouTube" width="100%"></a>
+  <br>
+  <a href="https://youtu.be/kbJPH0ggyPc"><b>Watch the demo on YouTube</b></a>
+</p>
+
 <p align="center">
   <img src="docs/images/logo.svg" width="72" height="72" alt="Mosca logo">
 </p>
